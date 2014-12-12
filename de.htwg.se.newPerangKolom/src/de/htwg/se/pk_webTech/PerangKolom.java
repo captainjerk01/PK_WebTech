@@ -50,6 +50,7 @@ public final class PerangKolom<E> {
 		while (continueGame) {
 			continueGame = tui.processInputLine(scanner.next());
 		}
+		//DELETETHISLINE
 	}
 	
 }
