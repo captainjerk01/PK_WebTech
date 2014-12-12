@@ -1,0 +1,153 @@
+methodensammlung für controllererstellung:
+
+===================================
+
+aus Grid:
+
+public static Grid getInstance()
+public ICell2[][] getCellArray() {
+public static int getNumberOfRows() {
+public static void setNumberOfRows(int x) {
+public static int getNumberOfCols() {
+public static void setNumberOfCols(int y) {
+public ICell2 getCell(int x, int y) {
+	
+
+===================================
+
+public interface ICell2 {
+
+			int getPositionX();
+	
+			void setPositionX(int x);
+		
+			int getPositionY();
+	
+			void setPositionY(int y);
+	
+boolean isCellFilled();
+
+int getCellValue();
+	
+			void setCellValue(int value);
+
+IPlayer2 getCellOwner();
+
+void setCellOwner(IPlayer2 player);
+
+void setBorder(int borderNr, boolean fillBorder);
+
+boolean getBorder(int borderNr);
+
+String toString();
+	
+			int makeRandomNumber();
+	
+int getCellSize();
+
+void setCellSize(int size);
+
+char[][] getCharArray();
+
+void setCharArray(char[][] charArray);
+	
+			int getNumberOfFilledBorders();
+	
+===================================
+
+public interface IGameSettings {
+
+IPlayer2 getPlayer(int playerNumber);
+
+void setPlayer(IPlayer2 player, int numberOfPlayer);
+
+void setWhoseTurnItIs(IPlayer2 player);
+
+IPlayer2 getWhoseTurnItIs();
+
+void changeTurn();
+
+IPlayer2 getWinner();
+
+void setWinner(IPlayer2 player);
+	
+}
+===================================
+
+public interface IPlayer2 {
+	
+void setPlayerHuman(boolean isHuman);
+
+boolean isPlayerAHuman();
+
+int getNumberOfPoints();
+
+void addPointsToPlayersAccount(int newPoints);	
+
+void setPlayersName(String name);
+
+String getPlayersName();
+===================================
+===================================
+===================================
+===================================
+!!!WEGEN KONFLIKT ZUM MERKEN REINKOPIERT; KANN IGNORIERT WERDEN!!!
+
+	void setPlayerHuman(boolean isHuman, IPlayer2 player);
+	
+	boolean isPlayerAHuman(IPlayer2 player);
+	
+	int getNumberOfPoints(IPlayer2 player);
+
+	void addPointsToPlayersAccount(int newPoints, IPlayer2 player);
+
+	void setPlayersName(String name, IPlayer2 player);
+
+	String getPlayersName(IPlayer2 player);
+
+	int getCellValue(int row, int col);
+
+	int getCellValue(ICell2 cell);
+
+	IPlayer2 getCellOwner(int row, int col);
+
+	IPlayer2 getCellOwner(ICell2 cell);
+
+	void setCellOwner(IPlayer2 player, int row, int col);
+
+	void setCellOwner(IPlayer2 player, ICell2 cell);
+
+	void setBorder(int borderNr, boolean fillBorder, int row, int col);
+
+	void setBorder(int borderNr, boolean fillBorder, ICell2 cell);
+
+
+	boolean getBorder(int borderNr, int row, int col);
+
+	boolean getBorder(int borderNr, ICell2 cell);
+
+
+	int getCellSize(int row, int col);
+
+	int getCellSize(ICell2 cell);
+
+
+	void setCellSize(int size, int row, int col);
+
+	void setCellSize(int size, ICell2 cell);
+
+
+
+	char[][] getCharArray(int row, int col);
+
+	char[][] getCharArray(ICell2 cell);
+
+
+	void setCharArray(char[][] charArray, int row, int col);
+
+	
+	void setCharArray(char[][] charArray, ICell2 cell);
+
+
+	boolean isCellFilled(ICell2 cell);
+	public boolean isCellFilled(int row, int col)
