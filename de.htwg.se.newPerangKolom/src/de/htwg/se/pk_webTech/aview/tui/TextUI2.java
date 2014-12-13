@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+import de.htwg.se.pk_webTech.PerangKolom;
 import de.htwg.se.pk_webTech.controller.impl.PKController;
 import de.htwg.se.pk_webTech.model.IPlayer2;
 import de.htwg.se.pk_webTech.model.impl.CellArray;
@@ -15,6 +16,7 @@ import de.htwg.se.pk_webTech.util.observer.IObserver;
 
 public class TextUI2 implements IObserver  {
 
+	private static boolean STARTGAME = true;
 	private static final int NOTHING_CHOSEN = 0;
 	private static final int OPTION_CHOICE_CHOOSE_OPPONENT = 1;
 	private static final int OPTION_CHOICE_ENTER_NAMES = 2;
@@ -33,9 +35,10 @@ public class TextUI2 implements IObserver  {
 
 	private boolean continueGame = true;
 	//optionChoice is needed to be able to ask for extra input (to be able to leave the loop)	
+	//private int optionChoice = NOTHING_CHOSEN;
 	private int optionChoice = 0;
 	//subChoice is needed to determine which options to choose in submethods
-	private int subChoice = 0;
+	private int subChoice = NOTHING_CHOSEN;
 	private boolean finishedAfterSwitchCase = false;
 	
 	public TextUI2(PKController controller) {
@@ -48,13 +51,20 @@ public class TextUI2 implements IObserver  {
 		printTUI();
 	}
 
-
 	public void printTUI() {
 		//logger.info(newLine + controller.getGridString());
 		//logger.info(newLine + controller.getStatus());
 		//logger.info(newLine + controller.getShortInstructions());
 	}
-	
+
+	/** 
+	 * print welcome-string and instruction when game starts new 
+	 */
+	public void printStartMessage() {
+		logger.info(MessagesForUser2.startOfTheGame);
+		logger.info(MessagesForUser2.shortInstruction);
+		STARTGAME = false;
+	}
 	
 	public boolean processInputLine(String line) {
 		
@@ -63,7 +73,11 @@ public class TextUI2 implements IObserver  {
 		finishedAfterSwitchCase = false;
 		
 		char c = line.charAt(0);
-				
+		
+		if (STARTGAME) {
+			printStartMessage();
+		}
+		
 		if (optionChoice == NOTHING_CHOSEN) {
 			continueGame = inputCheckNormalMenu(c, line);
 		} 
@@ -71,20 +85,20 @@ public class TextUI2 implements IObserver  {
 			inputCheckForGameOptions(c, line);
 		}
 		
-		//if c didn't match the cases above user has to determine a border to fill
+		// if c didn't match the cases above, the user has to determine a border to be filled
 		
 		if ( !finishedAfterSwitchCase) {
 			determineBorderToFill(c, line);
 		}
-		
-		
-		
+			
 		if (finishedAfterSwitchCase && continueGame)
 			logger.info(MessagesForUser2.shortInstruction);
 		return continueGame;
 	}
 	
-	
+	/**
+	 * check if player wants to start a new game or quit the game (Parameters n, x) 
+	 */
 	private boolean inputCheckNormalMenu(char c, String line) {
 		
 		switch (c) {
@@ -147,14 +161,11 @@ public class TextUI2 implements IObserver  {
 				chooseSizeOfGameField(c, line);
 				break;
 				
-			
 			case OPTION_CHOICE_SHOW_OVERVIEW:  	//finally create the new grid and set optionChoice = 0 again
 				initSubChoice();
 				showOverviewOfGameOptions();
 				break;
 			}
-		
-
 		}
 	}
 	
@@ -191,7 +202,6 @@ public class TextUI2 implements IObserver  {
 			}
 			break;
 		}
-		
 	}
 	
 	

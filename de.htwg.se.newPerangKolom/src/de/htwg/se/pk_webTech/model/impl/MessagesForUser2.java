@@ -7,8 +7,8 @@ public class MessagesForUser2  {
 	public static final String help_inputInstructionForConsole = 
 				"Type in the following letters to control the game: \n" + 
 				
-				"Start New Game: n\n"
-				+ "Exit Game: x\n"  
+				"to start a new game, type: n\n"
+				+ "to quit the game, type: x\n"  
 
 				+"To mark a border, type in a number with three digits:\n" 
 				+ "The first number specifies the row the cell is positioned in\n"

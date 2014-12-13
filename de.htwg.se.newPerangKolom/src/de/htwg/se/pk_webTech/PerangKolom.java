@@ -42,15 +42,15 @@ public final class PerangKolom<E> {
 		PerangKolom.getInstance();
 		
 		//print the welcome-string
-		PerangKolom.getInstance().logger.info(MessagesForUser2.startOfTheGame);
-		
+		tui.printStartMessage();
+				
 		// continue to read user input on the TUI until the user decides to quit
 		boolean continueGame = true;
 		scanner = new Scanner(System.in);
 		while (continueGame) {
 			continueGame = tui.processInputLine(scanner.next());
 		}
-		//DELETETHISLINE
+
 	}
 	
 }
